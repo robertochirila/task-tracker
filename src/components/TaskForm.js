@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { taskFormStyle } from '../styles/TaskForm'
-
+import { taskFormStyle } from '../styles/TaskFormStyle'
+import { TaskList } from './TaskList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
-import TextField from 'material-ui/TextField'
+import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 
 
@@ -26,8 +26,11 @@ export class TaskForm extends Component {
         const { taskName, taskDuration, taskList } = this.state
         const newTask = {
             taskName: taskName,
-            taskDuration: taskDuration
+            taskDuration: taskDuration,
+            completed: false
         }
+
+
 
         /**
          * this.setState({
@@ -41,18 +44,26 @@ export class TaskForm extends Component {
         }))
     }
 
+    onDelete = task => {
+        console.log(task)
+    }
+
+    onComplete = task => {
+        console.log(task)
+    }
+
     onChange = (e) => {
         e.preventDefault()
         this.setState({ [e.target.name]: e.target.value })
     }
     render() {
-        const { taskName, taskDuration } = this.state
+        const { taskName, taskDuration, taskList } = this.state
         return (
             <div style={taskFormStyle}>
                 <MuiThemeProvider>
                     <React.Fragment>
                         <AppBar title="Add a task" />
-                        <form noValidate onSubmit={this.onSubmit}>
+                        <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
                             <TextField
                                 hintText="Task Name"
                                 floatingLabelText="Task Name"
@@ -69,6 +80,7 @@ export class TaskForm extends Component {
                                 defaultValue={taskDuration}
                                 value={taskDuration}
                             />
+
                             <RaisedButton
                                 label="Next"
                                 primary={true}
@@ -77,6 +89,15 @@ export class TaskForm extends Component {
                         </form>
                     </React.Fragment>
                 </MuiThemeProvider>
+                {
+                    taskList.length > 0 ?
+                        <TaskList taskList={taskList}
+                            onComplete={this.onComplete}
+                            onDelete={this.onDelete}
+                        />
+                        :
+                        <p>You currently didn't added any tasks !</p>
+                }
             </div>
         )
     }

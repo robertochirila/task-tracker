@@ -34,8 +34,8 @@ export class TaskForm extends Component {
 
         /**
          * this.setState({
-  arrayvar: [...this.state.arrayvar, newelement]
-})
+         arrayvar: [...this.state.arrayvar, newelement]
+        })
          */
         this.setState(prevState => ({
             taskList: [...prevState.taskList, newTask],
@@ -44,12 +44,18 @@ export class TaskForm extends Component {
         }))
     }
 
-    onDelete = task => {
-        console.log(task)
+    onDelete = index => {
+        const { taskList } = this.state
+        const newList = [...taskList]
+        newList.splice(index, 1)
+        this.setState({
+            taskList: newList
+        })
     }
 
-    onComplete = task => {
-        console.log(task)
+    onComplete = index => {
+        const { taskList } = this.state
+
     }
 
     onChange = (e) => {

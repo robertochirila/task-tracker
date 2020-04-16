@@ -7,13 +7,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 export class Task extends Component {
 
     delete = () => {
-        const { task } = this.props
-        this.props.onDelete(task)
+        const { index } = this.props
+        this.props.onDelete(index)
     }
 
     complete = () => {
-        const { task } = this.props
-        this.props.onComplete(task)
+        const { index } = this.props
+        this.props.onComplete(index)
     }
 
 

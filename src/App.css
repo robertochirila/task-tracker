@@ -1,3 +1,34 @@
-body{
+body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.task--form {
+    text-align: center
+}
+
+.task--list {
+    width: 100%;
+    text-align: left;
+    list-style: none;
+}
+
+.task--list--item {
+    width: 20%;
+    margin: 20px 20px;
+    float: left;
+}
+
+.task--details {
+    text-align: center;
+    display: block;
+}
+
+.task--action--buttons {
+    width: 100%;
+    background-color: lightsalmon;
+}
+
+.task--complete--wrapper {
+    background-color: indianred;
+    border-radius: 20px;
 }

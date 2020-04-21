@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { taskListStyle } from '../styles/TaskListStyle'
 import { Task } from './Task'
 
 export class TaskList extends Component {
@@ -8,11 +7,11 @@ export class TaskList extends Component {
         const { taskList, onDelete, onComplete } = this.props
         return (
             <div>
-                <ul style={taskListStyle}>
+                <ul className="task--list">
                     {
                         taskList.map((data, index) => {
                             return (
-                                <li key={index}>
+                                <li key={index} className="task--list--item">
                                     <Task
                                         index={index}
                                         task={data}

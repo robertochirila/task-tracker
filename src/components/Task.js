@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 export class Task extends Component {
 
@@ -26,22 +26,41 @@ export class Task extends Component {
                         task.completed == false ?
                             <React.Fragment>
                                 <RaisedButton
+                                    className="task--action--buttons"
                                     label="Delete"
                                     primary={true}
                                     type="submit"
                                     onClick={this.delete}
                                 />
-                                <p><span>{task.taskName}</span>
-                                    <span>{task.taskDuration}</span></p>
+                                <p><span className="task--details">{task.taskName}</span>
+                                    <span className="task--details">{task.taskDuration}</span></p>
                                 <RaisedButton
-                                    label="Complete"
+                                    className="task--action--buttons"
+                                    label="Finish"
                                     primary={true}
                                     type="submit"
                                     onClick={this.complete}
                                 />
                             </React.Fragment>
                             :
-                            <br></br>
+                            <div className="task--complete--wrapper">
+                                <RaisedButton
+                                    className="task--action--buttons"
+                                    label="Delete"
+                                    primary={true}
+                                    type="submit"
+                                    onClick={this.delete}
+                                />
+                                <p><span className="task--details">{task.taskName}</span>
+                                    <span className="task--details">{task.taskDuration}</span></p>
+                                <RaisedButton
+                                    className="task--action--buttons"
+                                    label="Finish"
+                                    primary={true}
+                                    type="submit"
+                                    onClick={this.complete}
+                                />
+                            </div>
                     }
                 </MuiThemeProvider>
             </React.Fragment>

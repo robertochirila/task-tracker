@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { taskFormStyle } from '../styles/TaskFormStyle'
 import { TaskList } from './TaskList'
+import { isNumber } from '../validations/isNumber'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import TextField from 'material-ui/TextField';
@@ -17,31 +17,31 @@ export class TaskForm extends Component {
             taskList: []
         }
     }
-    componentDidMount() {
-        //console.log(taskFormStyle)
-    }
+
 
     onSubmit = (e) => {
         e.preventDefault()
         const { taskName, taskDuration, taskList } = this.state
-        const newTask = {
-            taskName: taskName,
-            taskDuration: taskDuration,
-            completed: false
+
+        if (isNumber(Number(taskDuration))) {
+            const newTask = {
+                taskName: taskName,
+                taskDuration: taskDuration,
+                completed: false
+            }
+            /**
+             * this.setState({
+             arrayvar: [...this.state.arrayvar, newelement]
+            })
+             */
+            this.setState(prevState => ({
+                taskList: [...prevState.taskList, newTask],
+                taskDuration: "",
+                taskName: ""
+            }))
         }
 
 
-
-        /**
-         * this.setState({
-         arrayvar: [...this.state.arrayvar, newelement]
-        })
-         */
-        this.setState(prevState => ({
-            taskList: [...prevState.taskList, newTask],
-            taskDuration: "",
-            taskName: ""
-        }))
     }
 
     onDelete = index => {
@@ -72,7 +72,7 @@ export class TaskForm extends Component {
     render() {
         const { taskName, taskDuration, taskList } = this.state
         return (
-            <div style={taskFormStyle}>
+            <div className="task--form">
                 <MuiThemeProvider>
                     <React.Fragment>
                         <AppBar title="Add a task" />
@@ -87,7 +87,7 @@ export class TaskForm extends Component {
                             />
                             <TextField
                                 hintText="Task Duration"
-                                floatingLabelText="Task Duration"
+                                floatingLabelText="Task Duration (hrs)"
                                 onChange={this.onChange}
                                 name="taskDuration"
                                 defaultValue={taskDuration}
@@ -95,7 +95,7 @@ export class TaskForm extends Component {
                             />
 
                             <RaisedButton
-                                label="Next"
+                                label="Submit"
                                 primary={true}
                                 type="submit"
                             />
@@ -109,7 +109,7 @@ export class TaskForm extends Component {
                             onDelete={this.onDelete}
                         />
                         :
-                        <p>You currently didn't added any tasks !</p>
+                        <p>No Tasks Yet !</p>
                 }
             </div>
         )

@@ -54,7 +54,14 @@ export class TaskForm extends Component {
     }
 
     onComplete = index => {
+
         const { taskList } = this.state
+        const newTaskList = taskList
+        newTaskList[index].completed = 'true'
+
+        this.setState({
+            taskList: newTaskList
+        })
 
     }
 
